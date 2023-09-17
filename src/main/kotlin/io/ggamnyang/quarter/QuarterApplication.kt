@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class QuarterApplication
 
 fun main(args: Array<String>) {
-	runApplication<QuarterApplication>(*args)
+    runApplication<QuarterApplication>(*args)
 }
