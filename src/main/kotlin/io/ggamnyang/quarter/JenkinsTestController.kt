@@ -10,6 +10,6 @@ class JenkinsTestController {
     @GetMapping("/test")
     @ResponseBody
     fun testJenkins(): String {
-        return "Hello, Jenkins CI CD WORLD!!!"
+        return "Hello, Jenkins CI CD WORLD!!!!"
     }
 }
