@@ -1,7 +1,9 @@
 spring:
 
   datasource:
-    url: external_url_of_postgresql
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
 
   jpa:
     hibernate:

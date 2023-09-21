@@ -4,6 +4,8 @@ import io.ggamnyang.quarter.main.domain.recipe.RecipeFlavorRelation
 import io.ggamnyang.quarter.support.domain.BaseEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.OneToMany
 
@@ -14,6 +16,10 @@ class Flavor(
 
     @Column(nullable = false)
     val imageUrl: String,
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    val taste: TASTE,
 
     @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY)
     val flavorIngredientRelation: List<FlavorIngredientRelation>,
