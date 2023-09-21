@@ -16,7 +16,9 @@ class Ingredient(
     val imageUrl: String,
 
     @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY)
-    val flavorIngredientRelation: List<FlavorIngredientRelation>? = null,
+    val flavorIngredientRelation: List<FlavorIngredientRelation>,
 
     id: Long = 0L
-) : BaseEntity(id)
+) : BaseEntity(id) {
+    fun getFlavorIds(): List<Long> = this.flavorIngredientRelation.map { it.flavor.id }
+}
