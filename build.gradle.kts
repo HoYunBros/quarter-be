@@ -77,10 +77,9 @@ tasks {
         from("${asciidoctor.get().outputDir}/index.html")
         into("src/main/resources/static/docs")
     }
+
     bootJar {
         dependsOn(asciidoctor)
-        from("${asciidoctor.get().outputDir}/index.html") {
-            into("static/docs")
-        }
+        dependsOn(getByName("copyDocs"))
     }
 }
