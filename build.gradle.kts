@@ -34,6 +34,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     runtimeOnly("com.h2database:h2")
+    implementation("org.postgresql:postgresql")
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
