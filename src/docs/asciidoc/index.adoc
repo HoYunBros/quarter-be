@@ -14,3 +14,4 @@ endif::[]
 Best Robbins API
 
 include::ingredient.adoc[]
+include::size.adoc[]

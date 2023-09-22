@@ -7,20 +7,25 @@ import io.ggamnyang.quarter.main.domain.ingredient.Ingredient
 import io.ggamnyang.quarter.main.domain.ingredient.IngredientName
 import io.ggamnyang.quarter.main.domain.ingredient.IngredientRepository
 import io.ggamnyang.quarter.main.domain.ingredient.IngredientService
+import io.ggamnyang.quarter.main.domain.size.Size
+import io.ggamnyang.quarter.main.domain.size.SizeName
+import io.ggamnyang.quarter.main.domain.size.SizeRepository
 import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Service
 
 @Service
 class DatabaseInitializer(
-    private val ingredientRepository: IngredientRepository,
     private val ingredientService: IngredientService,
-    private val flavorRepository: FlavorRepository
+    private val ingredientRepository: IngredientRepository,
+    private val flavorRepository: FlavorRepository,
+    private val sizeRepository: SizeRepository
 ) {
 
     @PostConstruct
     fun initializeData() {
         initializeIngredients()
         initializeFlavors()
+        initializeSizes()
     }
 
     private fun initializeIngredients() {
@@ -32,6 +37,12 @@ class DatabaseInitializer(
     private fun initializeFlavors() {
         flavors.forEach { flavor ->
             flavorRepository.findByName(flavor.name) ?: flavorRepository.save(flavor)
+        }
+    }
+
+    private fun initializeSizes() {
+        sizes.forEach { size ->
+            sizeRepository.findByName(size.name) ?: sizeRepository.save(size)
         }
     }
 
@@ -92,7 +103,19 @@ class DatabaseInitializer(
             Flavor("초코 퐁당 쿠키런", flavorUrl("icecream_octopus"), TASTE.SWEET)
         )
 
+        private val sizes = listOf(
+            Size(SizeName.SINGLE_REGULAR, 1, sizeUrl("single")),
+            Size(SizeName.SINGLE_KING, 1, sizeUrl("single")),
+            Size(SizeName.DOUBLE_JUNIOR, 2, sizeUrl("double")),
+            Size(SizeName.DOUBLE_REGULAR, 2, sizeUrl("double")),
+            Size(SizeName.PINT, 3, sizeUrl("pint")),
+            Size(SizeName.QUARTER, 4, sizeUrl("quarter")),
+            Size(SizeName.FAMILY, 5, sizeUrl("family")),
+            Size(SizeName.HALF_GALLON, 6, sizeUrl("half_gallon"))
+        )
+
         private fun ingredientUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/ingredients/$name.png"
         private fun flavorUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/flavors/$name.png"
+        private fun sizeUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/sizes/$name.png"
     }
 }
