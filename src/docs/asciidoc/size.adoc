@@ -1,0 +1,5 @@
+= Size API
+
+== 모든 사이즈 조회
+
+operation::sizes-get[snippets='http-request,http-response']

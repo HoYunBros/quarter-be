@@ -28,7 +28,7 @@ class IngredientRestControllerTest : RestControllerTest() {
                 status { isOk() }
                 content { success(responses) }
             }.andDo {
-                handle(document("ingredient-get"))
+                handle(document("ingredients-get"))
             }
     }
 }
