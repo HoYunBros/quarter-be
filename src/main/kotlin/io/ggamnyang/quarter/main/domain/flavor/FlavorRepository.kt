@@ -4,4 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface FlavorRepository : JpaRepository<Flavor, Long>
+interface FlavorRepository : JpaRepository<Flavor, Long> {
+
+    fun findByName(name: String): Flavor?
+}
