@@ -162,6 +162,6 @@ class DatabaseInitializer(
 
         private fun ingredientUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/ingredients/$name.png"
         private fun flavorUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/flavors/$name.png"
-        private fun sizeUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/sizes/$name.png"
+        private fun sizeUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/sizes/$name.svg"
     }
 }
