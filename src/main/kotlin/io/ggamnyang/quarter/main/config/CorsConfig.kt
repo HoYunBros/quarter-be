@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 class CorsConfig : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/api/**")
-            .allowedOrigins("https://quarter-fe.vercel.app")
+            .allowedOrigins("*")
             .allowedMethods(*PERMIT_METHODS.map(HttpMethod::name).toTypedArray())
     }
 
