@@ -8,7 +8,7 @@ data class IngredientResponse(
 ) {
     constructor(ingredient: Ingredient) : this(
         ingredient.id,
-        ingredient.name,
+        ingredient.name.kr,
         ingredient.imageUrl,
         ingredient.getFlavorIds()
     )
