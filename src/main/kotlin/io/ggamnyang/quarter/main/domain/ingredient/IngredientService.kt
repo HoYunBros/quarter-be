@@ -16,6 +16,6 @@ class IngredientService(
 
     @Cacheable(value = ["ingredient"], key = "#name")
     fun getByName(name: IngredientName): Ingredient {
-        return ingredientRepository.findByName(name) ?: throw IllegalArgumentException("$name 해당하는 재료가 없습니다")
+        return ingredientRepository.getByName(name)
     }
 }
