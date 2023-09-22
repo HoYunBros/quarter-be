@@ -4,19 +4,22 @@ import io.ggamnyang.quarter.main.domain.flavor.FlavorIngredientRelation
 import io.ggamnyang.quarter.support.domain.BaseEntity
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.OneToMany
 
 @Entity
 class Ingredient(
     @Column(nullable = false)
-    val name: String,
+    @Enumerated(EnumType.STRING)
+    val name: IngredientName,
 
     @Column(nullable = false)
     val imageUrl: String,
 
     @OneToMany(mappedBy = "ingredient", fetch = FetchType.LAZY)
-    val flavorIngredientRelation: List<FlavorIngredientRelation>,
+    val flavorIngredientRelation: List<FlavorIngredientRelation> = emptyList(),
 
     id: Long = 0L
 ) : BaseEntity(id) {

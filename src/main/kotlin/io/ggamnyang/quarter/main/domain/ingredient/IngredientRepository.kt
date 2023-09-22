@@ -9,4 +9,6 @@ interface IngredientRepository : JpaRepository<Ingredient, Long> {
 
     @Query("SELECT i FROM Ingredient i LEFT JOIN FETCH i.flavorIngredientRelation")
     override fun findAll(): List<Ingredient>
+
+    fun findByName(name: IngredientName): Ingredient?
 }
