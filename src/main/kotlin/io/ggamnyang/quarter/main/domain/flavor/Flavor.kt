@@ -22,9 +22,9 @@ class Flavor(
     val taste: TASTE,
 
     @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY)
-    val flavorIngredientRelation: List<FlavorIngredientRelation>,
+    val flavorIngredientRelation: List<FlavorIngredientRelation> = emptyList(),
 
     @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY)
-    val recipeFlavorRelation: List<RecipeFlavorRelation>,
+    val recipeFlavorRelation: List<RecipeFlavorRelation> = emptyList(),
     id: Long = 0L
 ) : BaseEntity(id)
