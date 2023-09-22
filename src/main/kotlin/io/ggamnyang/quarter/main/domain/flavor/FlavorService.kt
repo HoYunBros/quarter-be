@@ -10,6 +10,6 @@ class FlavorService(
 
     @Cacheable(value = ["flavor"], key = "#name")
     fun getByName(name: String): Flavor {
-        return flavorRepository.findByName(name) ?: throw IllegalArgumentException("$name 해당하는 Flavor가 없습니다")
+        return flavorRepository.getByName(name)
     }
 }
