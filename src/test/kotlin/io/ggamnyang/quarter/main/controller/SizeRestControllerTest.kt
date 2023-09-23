@@ -7,7 +7,7 @@ import io.ggamnyang.quarter.main.support.fixtures.createSize
 import io.mockk.every
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation
+import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*
 import org.springframework.test.web.servlet.get
 
 @WebMvcTest(SizeRestController::class)
@@ -27,7 +27,7 @@ class SizeRestControllerTest : RestControllerTest() {
                 status { isOk() }
                 content { success(responses) }
             }.andDo {
-                handle(MockMvcRestDocumentation.document("sizes-get"))
+                handle(document("sizes-get"))
             }
     }
 }

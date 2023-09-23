@@ -27,6 +27,7 @@ class RecipeService(
 
     private fun getRecommendedFlavors(ingredientIds: List<Long>, size: Size): List<Flavor> {
         val flavors = flavorService.findFlavorsByIngredientIds(ingredientIds)
+        if (flavors.size < size.value) throw IllegalArgumentException("size보다 적은 개수의 맛만 존재합니다.")
 
         return flavors.shuffled().take(size.value) // FIXME: shuffled 병목이 생긴다면 index 랜덤으로 수정
     }

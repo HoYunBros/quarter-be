@@ -9,7 +9,7 @@ data class RecipeRequest(
 
 data class RecipeResponse(
     val id: Long,
-    val name: String,
+    val recipeName: String,
     val flavors: List<FlavorResponse>
 ) {
     constructor(recipe: Recipe) : this(

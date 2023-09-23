@@ -21,7 +21,7 @@ class Recipe(
     val size: Size,
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    var recipeFlavorRelation: Set<RecipeFlavorRelation> = hashSetOf(),
+    var recipeFlavorRelation: MutableList<RecipeFlavorRelation> = mutableListOf(),
     id: Long = 0L
 ) : BaseEntity(id) {
 
@@ -31,6 +31,7 @@ class Recipe(
 
     private fun addFlavor(flavor: Flavor) {
         val recipeFlavorRelation = RecipeFlavorRelation(this, flavor)
+        this.recipeFlavorRelation.add(recipeFlavorRelation)
         flavor.recipeFlavorRelation.add(recipeFlavorRelation)
     }
 

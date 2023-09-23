@@ -3,3 +3,4 @@
 == 조합 생성
 
 operation::recipe-post[snippets='http-request,http-response']
+operation::recipe-get[snippets='http-request,http-response']

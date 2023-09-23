@@ -10,7 +10,7 @@ private const val RECIPE_NAME = "recipe name"
 fun createRecipe(
     name: String = RECIPE_NAME,
     size: Size = createSize(),
-    recipeFlavorRelations: Set<RecipeFlavorRelation> = emptySet(),
+    recipeFlavorRelations: MutableList<RecipeFlavorRelation> = mutableListOf(),
     id: Long = 0L
 ): Recipe {
     return Recipe(name, size, recipeFlavorRelations, id)
