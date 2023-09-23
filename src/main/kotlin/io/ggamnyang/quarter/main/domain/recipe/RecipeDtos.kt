@@ -3,12 +3,13 @@ package io.ggamnyang.quarter.main.domain.recipe
 import io.ggamnyang.quarter.main.domain.flavor.FlavorResponse
 
 data class RecipeRequest(
+    val sizeId: Long,
     val ingredientIds: List<Long>
 )
 
 data class RecipeResponse(
     val id: Long,
-    val name: String,
+    val recipeName: String,
     val flavors: List<FlavorResponse>
 ) {
     constructor(recipe: Recipe) : this(

@@ -2,6 +2,7 @@ package io.ggamnyang.quarter.main.domain.flavor
 
 import io.ggamnyang.quarter.main.domain.recipe.RecipeFlavorRelation
 import io.ggamnyang.quarter.support.domain.BaseEntity
+import jakarta.persistence.CascadeType
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -21,10 +22,10 @@ class Flavor(
     @Enumerated(EnumType.STRING)
     val taste: TASTE,
 
-    @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY)
-    val flavorIngredientRelation: List<FlavorIngredientRelation> = emptyList(),
+    @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val flavorIngredientRelation: Set<FlavorIngredientRelation> = hashSetOf(),
 
-    @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY)
-    val recipeFlavorRelation: List<RecipeFlavorRelation> = emptyList(),
+    @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    val recipeFlavorRelation: MutableSet<RecipeFlavorRelation> = hashSetOf(),
     id: Long = 0L
 ) : BaseEntity(id)
