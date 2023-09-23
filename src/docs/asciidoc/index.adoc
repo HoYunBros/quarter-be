@@ -18,3 +18,5 @@ include::ingredient.adoc[]
 include::size.adoc[]
 
 include::recipe.adoc[]
+
+include::recommendation.adoc[]

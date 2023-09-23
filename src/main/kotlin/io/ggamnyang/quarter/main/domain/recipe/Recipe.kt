@@ -32,7 +32,6 @@ class Recipe(
     private fun addFlavor(flavor: Flavor) {
         val recipeFlavorRelation = RecipeFlavorRelation(this, flavor)
         this.recipeFlavorRelation.add(recipeFlavorRelation)
-        flavor.recipeFlavorRelation.add(recipeFlavorRelation)
     }
 
     fun addFlavors(flavors: List<Flavor>) {

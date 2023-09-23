@@ -4,6 +4,7 @@ import io.ggamnyang.quarter.main.domain.flavor.Flavor
 import io.ggamnyang.quarter.main.domain.flavor.FlavorIngredientRelation
 import io.ggamnyang.quarter.main.domain.flavor.FlavorIngredientRelationRepository
 import io.ggamnyang.quarter.main.domain.flavor.FlavorRepository
+import io.ggamnyang.quarter.main.domain.flavor.FlavorService
 import io.ggamnyang.quarter.main.domain.flavor.TASTE
 import io.ggamnyang.quarter.main.domain.flavor.getByName
 import io.ggamnyang.quarter.main.domain.ingredient.Ingredient
@@ -12,19 +13,27 @@ import io.ggamnyang.quarter.main.domain.ingredient.IngredientName.*
 import io.ggamnyang.quarter.main.domain.ingredient.IngredientRepository
 import io.ggamnyang.quarter.main.domain.ingredient.IngredientService
 import io.ggamnyang.quarter.main.domain.ingredient.getByName
+import io.ggamnyang.quarter.main.domain.recipe.Recipe
+import io.ggamnyang.quarter.main.domain.recipe.RecipeRepository
+import io.ggamnyang.quarter.main.domain.recommendation.Recommendation
+import io.ggamnyang.quarter.main.domain.recommendation.RecommendationRepository
 import io.ggamnyang.quarter.main.domain.size.Size
 import io.ggamnyang.quarter.main.domain.size.SizeName
 import io.ggamnyang.quarter.main.domain.size.SizeRepository
+import io.ggamnyang.quarter.main.domain.size.getByName
 import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Service
 
 @Service
 class DatabaseInitializer(
-    private val ingredientService: IngredientService,
     private val ingredientRepository: IngredientRepository,
+    private val ingredientService: IngredientService,
+    private val flavorService: FlavorService,
     private val flavorRepository: FlavorRepository,
     private val flavorIngredientRelationRepository: FlavorIngredientRelationRepository,
-    private val sizeRepository: SizeRepository
+    private val sizeRepository: SizeRepository,
+    private val recipeRepository: RecipeRepository,
+    private val recommendationRepository: RecommendationRepository
 ) {
 
     @PostConstruct
@@ -33,6 +42,7 @@ class DatabaseInitializer(
         initializeFlavors()
         initializeSizes()
         initializeFlavorIngredientRelations()
+        initializeRecommendations()
     }
 
     private fun initializeIngredients() {
@@ -61,7 +71,7 @@ class DatabaseInitializer(
         saveIngredientRelations("초코나무 숲", CHOCOLATE, GREEN_TEA)
         saveIngredientRelations("슈팅스타", CHERRY)
         saveIngredientRelations("민트 초콜릿 칩", MINT, CHOCOLATE)
-        saveIngredientRelations("아몬드 붕붕", CHOCOLATE, ALMOND)
+        saveIngredientRelations("아몬드 봉봉", CHOCOLATE, ALMOND)
         saveIngredientRelations("오레오 쿠키 앤 크림치즈", CHEESE_CAKE, OREO)
         saveIngredientRelations("엄마는 외계인", CHOCOLATE)
         saveIngredientRelations("바닐라 아몬드 크런치", ALMOND)
@@ -85,9 +95,66 @@ class DatabaseInitializer(
         saveIngredientRelations("초코 퐁당 쿠키런", CHOCOLATE, BUTTER_COOKIE)
     }
 
+    private fun initializeRecommendations() {
+        saveRecommendation(
+            "호불호 없는 스테디셀러 조합",
+            "여러명과 함께 먹을 때 추천해요. 누구나 좋아하는 맛으로 담았어요!",
+            "steady_combination",
+            SizeName.QUARTER,
+            "엄마는 외계인",
+            "뉴욕 치즈케이크",
+            "바람과 함께 사라지다",
+            "오레오 쿠키 앤 크림"
+        )
+
+        saveRecommendation(
+            "이상해씨 조합",
+            "기분 전환 하고 싶은 날 추천해요. 재밌는 추억이 될 거예요!",
+            "bulbasaur_combination",
+            SizeName.DOUBLE_REGULAR,
+            "민트 초콜릿 칩",
+            "그린티"
+        )
+
+        saveRecommendation(
+            "씹는 재미가 있는 조합",
+            "고소한 견과류, 촉촉한 과일로 더 풍부한 맛을 즐길 수 있어요.",
+            "bite_combination",
+            SizeName.PINT,
+            "아몬드 봉봉",
+            "사랑에 빠진 딸기",
+            "디노 젤리"
+        )
+
+        saveRecommendation(
+            "입안 난리 나는 조합", "개성 강한 맛들을 모았어요. 신선한 맛을 경험하고 싶다면 추천해요(벌칙 아님)", "sharp_combination",
+            SizeName.FAMILY, "슈팅스타", "민트 초콜릿 칩", "피스타치오 아몬드", "레인보우 샤베트", "레드 라즈베리 소르베"
+        )
+
+        saveRecommendation(
+            "식후땡! 입가심 조합", "밥 먹고 후식으로 입가심 하기 좋은 조합이에요. 이달의 맛이 포함되어 있으니 얼른 먹는 걸 추천해요.", "after_meal_combination",
+            SizeName.HALF_GALLON, "오레오 쿠키 앤 크림", "베리베리 스트로베리", "31요거트", "초코 퐁당 쿠키런", "아이스 노티드 우유 생크림", "라이언 망고 마카롱"
+        )
+    }
+
+    private fun saveRecommendation(title: String, subTitle: String, imageUrl: String, sizeName: SizeName, vararg flavorNames: String): Recommendation {
+        val recipe = saveRecipe(title, sizeName, *flavorNames)
+        val recommendation = Recommendation(title, subTitle, recommendationUrl(imageUrl), recipe)
+
+        return recommendationRepository.save(recommendation)
+    }
+
+    private fun saveRecipe(recipeName: String, sizeName: SizeName, vararg flavorNames: String): Recipe {
+        val recipe = Recipe(recipeName, sizeRepository.getByName(sizeName))
+        val flavors = flavorNames.map { flavorService.getByName(it) }
+        recipe.addFlavors(flavors)
+
+        return recipe
+    }
+
     private fun saveIngredientRelations(flavorName: String, vararg ingredientNames: IngredientName) {
-        val flavor = flavorRepository.getByName(flavorName)
-        val ingredients = ingredientNames.map { ingredientRepository.getByName(it) }
+        val flavor = flavorService.getByName(flavorName)
+        val ingredients = ingredientNames.map { ingredientService.getByName(it) }
 
         ingredients.forEach { flavorIngredientRelationRepository.save(FlavorIngredientRelation(flavor, it)) }
     }
@@ -125,7 +192,7 @@ class DatabaseInitializer(
             Flavor("초코나무 숲", flavorUrl("choco_forest"), TASTE.BITTER),
             Flavor("슈팅스타", flavorUrl("shooting_star"), TASTE.SHARP),
             Flavor("민트 초콜릿 칩", flavorUrl("mint_choco"), TASTE.SHARP),
-            Flavor("아몬드 붕붕", flavorUrl("almond_bong"), TASTE.NUTTY),
+            Flavor("아몬드 봉봉", flavorUrl("almond_bong"), TASTE.NUTTY),
             Flavor("오레오 쿠키 앤 크림치즈", flavorUrl("oreo_cheese"), TASTE.SWEET_SALTY),
             Flavor("엄마는 외계인", flavorUrl("mother_alien"), TASTE.SWEET_SALTY),
             Flavor("바닐라 아몬드 크런치", flavorUrl("vanilla_almond"), TASTE.NUTTY),
@@ -163,5 +230,6 @@ class DatabaseInitializer(
         private fun ingredientUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/ingredients/$name.png"
         private fun flavorUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/flavors/$name.svg"
         private fun sizeUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/sizes/$name.svg"
+        private fun recommendationUrl(name: String) = "https://kr.object.ncloudstorage.com/best-robbins/recommendations/$name.svg"
     }
 }

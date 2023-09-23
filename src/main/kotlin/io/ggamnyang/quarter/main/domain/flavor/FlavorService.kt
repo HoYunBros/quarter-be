@@ -14,7 +14,7 @@ class FlavorService(
 
     @Cacheable(value = ["flavor"], key = "#name")
     fun getByName(name: String): Flavor {
-        return flavorRepository.findAll().find { it.name == name } ?: throw NoSuchElementException("$name Flavor가 존재하지 않습니다.")
+        return flavorRepository.getByName(name)
     }
 
     fun findFlavorsByIngredientIds(ingredientIds: List<Long>): List<Flavor> {

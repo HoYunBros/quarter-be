@@ -15,7 +15,8 @@ class SizeRestController(
 
     @GetMapping
     fun findAll(): ResponseEntity<ApiResponse<List<SizeResponse>>> {
-        val response = sizeService.findAll()
-        return ResponseEntity.ok(ApiResponse.success(response))
+        val responses = sizeService.findAll()
+
+        return ResponseEntity.ok(ApiResponse.success(responses))
     }
 }

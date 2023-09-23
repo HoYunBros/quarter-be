@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service
 class SizeService(
     private val sizeRepository: SizeRepository
 ) {
-
     @Cacheable(value = ["allSizes"], key = "'all'")
     fun findAll(): List<SizeResponse> {
         val sizes = sizeRepository.findAll()
