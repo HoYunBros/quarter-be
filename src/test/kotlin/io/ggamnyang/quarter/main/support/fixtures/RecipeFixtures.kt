@@ -1,7 +1,7 @@
 package io.ggamnyang.quarter.main.support.fixtures
 
+import io.ggamnyang.quarter.main.domain.flavor.Flavor
 import io.ggamnyang.quarter.main.domain.recipe.Recipe
-import io.ggamnyang.quarter.main.domain.recipe.RecipeFlavorRelation
 import io.ggamnyang.quarter.main.domain.recipe.RecipeRequest
 import io.ggamnyang.quarter.main.domain.size.Size
 
@@ -10,10 +10,13 @@ private const val RECIPE_NAME = "recipe name"
 fun createRecipe(
     name: String = RECIPE_NAME,
     size: Size = createSize(),
-    recipeFlavorRelations: MutableList<RecipeFlavorRelation> = mutableListOf(),
+    flavors: List<Flavor> = listOf(createFlavor()),
     id: Long = 0L
 ): Recipe {
-    return Recipe(name, size, recipeFlavorRelations, id)
+    val recipe = Recipe(name, size, id = id)
+    recipe.addFlavors(flavors)
+
+    return recipe
 }
 
 fun createRecipeRequest(

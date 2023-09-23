@@ -1,0 +1,5 @@
+= Recommendation API
+
+== 모든 추천 조합 조회
+
+operation::recommendations-get[snippets='http-request,http-response']

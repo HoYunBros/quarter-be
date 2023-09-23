@@ -25,7 +25,7 @@ class Flavor(
     @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     val flavorIngredientRelation: Set<FlavorIngredientRelation> = hashSetOf(),
 
-    @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "flavor", fetch = FetchType.LAZY)
     val recipeFlavorRelation: MutableSet<RecipeFlavorRelation> = hashSetOf(),
     id: Long = 0L
 ) : BaseEntity(id)
