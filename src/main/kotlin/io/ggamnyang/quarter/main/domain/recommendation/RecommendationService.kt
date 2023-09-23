@@ -9,8 +9,10 @@ class RecommendationService(
 ) {
     @Cacheable(value = ["allRecommendations"], key = "'all'")
     fun findAll(): List<RecommendationResponse> {
-        val recommendations = recommendationRepository.findAll()
+        val recommendations = recommendationRepository.findAll() * 10
 
         return recommendations.map { RecommendationResponse(it) }
     }
 }
+
+operator fun <T> Iterable<T>.times(count: Int): List<T> = List(count) { this }.flatten()
