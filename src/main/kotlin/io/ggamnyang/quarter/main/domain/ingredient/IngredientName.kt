@@ -21,5 +21,6 @@ enum class IngredientName(val kr: String) {
     APPLE("사과"),
     APPLE_MANGO("애플망고"),
     MILK_CREAM("우유생크림"),
-    BUTTER_COOKIE("버터쿠키")
+    BUTTER_COOKIE("버터쿠키"),
+    SWEET_POTATO("고구마")
 }

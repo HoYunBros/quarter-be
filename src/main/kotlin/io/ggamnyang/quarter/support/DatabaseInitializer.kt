@@ -181,7 +181,8 @@ class DatabaseInitializer(
             Ingredient(APPLE, ingredientUrl("apple")),
             Ingredient(APPLE_MANGO, ingredientUrl("apple_mango")),
             Ingredient(MILK_CREAM, ingredientUrl("milk_cream")),
-            Ingredient(BUTTER_COOKIE, ingredientUrl("butter_cookie"))
+            Ingredient(BUTTER_COOKIE, ingredientUrl("butter_cookie")),
+            Ingredient(SWEET_POTATO, ingredientUrl("sweet_potato"))
         )
 
         private val flavors = listOf(
@@ -210,7 +211,7 @@ class DatabaseInitializer(
             Flavor("레드 라즈베리 소르베", flavorUrl("red_raspberry_sorbet"), TASTE.SHARP),
             Flavor("디노 젤리", flavorUrl("dino_jelly"), TASTE.FRUITY),
             Flavor("라이언 망고 마카롱", flavorUrl("lion_mango"), TASTE.SWEET),
-            Flavor("찰떡이구마", flavorUrl("perfect_sweet_potato"), TASTE.SWEET),
+            Flavor("찰떡이구마", flavorUrl("perfect_sweet_potato"), TASTE.MILD),
             Flavor("초코야 민트해", flavorUrl("choco_mint"), TASTE.SHARP),
             Flavor("아이스 노티드 우유 생크림", flavorUrl("ice_knotted_milk"), TASTE.MILD),
             Flavor("초코 퐁당 쿠키런", flavorUrl("choco_cookierun"), TASTE.SWEET)
