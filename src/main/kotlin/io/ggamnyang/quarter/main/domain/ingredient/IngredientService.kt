@@ -18,4 +18,9 @@ class IngredientService(
     fun getByName(name: IngredientName): Ingredient {
         return ingredientRepository.getByName(name)
     }
+
+    @Cacheable(value = ["ingredientIds"], key = "#id")
+    fun getById(id: Long): Ingredient {
+        return ingredientRepository.getByIdNotNull(id)
+    }
 }

@@ -3,21 +3,22 @@ package io.ggamnyang.quarter.main.support.fixtures
 import io.ggamnyang.quarter.main.domain.recipe.Recipe
 import io.ggamnyang.quarter.main.domain.recipe.RecipeFlavorRelation
 import io.ggamnyang.quarter.main.domain.recipe.RecipeRequest
+import io.ggamnyang.quarter.main.domain.size.Size
 
 private const val RECIPE_NAME = "recipe name"
-private const val SIZE_VALUE = 3
-private const val SIZE_IMAGE_URL = "www.url.com"
 
 fun createRecipe(
     name: String = RECIPE_NAME,
-    recipeFlavorRelations: List<RecipeFlavorRelation>,
+    size: Size = createSize(),
+    recipeFlavorRelations: Set<RecipeFlavorRelation> = emptySet(),
     id: Long = 0L
 ): Recipe {
-    return Recipe(name, recipeFlavorRelations, id)
+    return Recipe(name, size, recipeFlavorRelations, id)
 }
 
 fun createRecipeRequest(
-    ids: List<Long>
+    sizeId: Long = 1L,
+    ids: List<Long> = listOf(1, 2, 3)
 ): RecipeRequest {
-    return RecipeRequest(ids)
+    return RecipeRequest(sizeId, ids)
 }

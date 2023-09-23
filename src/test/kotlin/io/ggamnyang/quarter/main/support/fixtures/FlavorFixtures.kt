@@ -12,8 +12,8 @@ fun createFlavor(
     name: String = FLAVOR_NAME,
     imageUrl: String = FLAVOR_IMAGE_URL,
     taste: TASTE = TASTE.SWEET,
-    relation1: List<FlavorIngredientRelation> = emptyList(),
-    relation2: List<RecipeFlavorRelation> = emptyList(),
+    relation1: Set<FlavorIngredientRelation> = emptySet(),
+    relation2: MutableSet<RecipeFlavorRelation> = hashSetOf(),
     id: Long = 0L
 ): Flavor {
     return Flavor(name, imageUrl, taste, relation1, relation2, id)

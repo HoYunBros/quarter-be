@@ -8,5 +8,5 @@ enum class SizeName(val kr: String) {
     PINT("파인트"),
     QUARTER("쿼터"),
     FAMILY("패밀리"),
-    HALF_GALLON("하프갤")
+    HALF_GALLON("하프갤런")
 }

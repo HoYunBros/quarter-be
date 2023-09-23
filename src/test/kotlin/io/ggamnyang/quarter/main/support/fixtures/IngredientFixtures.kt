@@ -11,7 +11,7 @@ private const val INGREDIENT_IMAGE_URL = "www.url.com"
 fun createIngredient(
     name: IngredientName = INGREDIENT_NAME,
     imageUrl: String = INGREDIENT_IMAGE_URL,
-    relation: List<FlavorIngredientRelation> = emptyList(),
+    relation: Set<FlavorIngredientRelation> = emptySet(),
     id: Long = 0L
 ): Ingredient {
     return Ingredient(name, imageUrl, relation, id)

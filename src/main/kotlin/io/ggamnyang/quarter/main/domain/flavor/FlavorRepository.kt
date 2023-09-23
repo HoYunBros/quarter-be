@@ -8,6 +8,5 @@ fun FlavorRepository.getByName(name: String) = findByName(name)
 
 @Repository
 interface FlavorRepository : JpaRepository<Flavor, Long> {
-
     fun findByName(name: String): Flavor?
 }

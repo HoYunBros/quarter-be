@@ -3,6 +3,7 @@ package io.ggamnyang.quarter.main.domain.recipe
 import io.ggamnyang.quarter.main.domain.flavor.FlavorResponse
 
 data class RecipeRequest(
+    val sizeId: Long,
     val ingredientIds: List<Long>
 )
 
