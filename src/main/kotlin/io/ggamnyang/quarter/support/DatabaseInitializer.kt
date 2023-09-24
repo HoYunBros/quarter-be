@@ -132,7 +132,7 @@ class DatabaseInitializer(
         )
 
         saveRecommendation(
-            "식후땡! 입가심 조합", "밥 먹고 후식으로 입가심 하기 좋은 조합이에요. 이달의 맛이 포함되어 있으니 얼른 먹는 걸 추천해요.", "after_meal_combination",
+            "식사 후! 입가심 조합", "밥 먹고 후식으로 입가심 하기 좋은 조합이에요. 이달의 맛이 포함되어 있으니 얼른 먹는 걸 추천해요.", "after_meal_combination",
             SizeName.HALF_GALLON, "오레오 쿠키 앤 크림", "베리베리 스트로베리", "31요거트", "초코 퐁당 쿠키런", "아이스 노티드 우유 생크림", "라이언 망고 마카롱"
         )
     }
