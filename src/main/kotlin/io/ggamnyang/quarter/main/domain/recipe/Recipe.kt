@@ -29,12 +29,12 @@ class Recipe(
         return this.recipeFlavorRelation.map { it.flavor }
     }
 
+    fun addFlavors(flavors: List<Flavor>) {
+        flavors.forEach { addFlavor(it) }
+    }
+
     private fun addFlavor(flavor: Flavor) {
         val recipeFlavorRelation = RecipeFlavorRelation(this, flavor)
         this.recipeFlavorRelation.add(recipeFlavorRelation)
-    }
-
-    fun addFlavors(flavors: List<Flavor>) {
-        flavors.forEach { addFlavor(it) }
     }
 }
